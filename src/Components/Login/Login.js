@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import loginimg from '../assets/images/loginimg.jpg'
+import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
-
+    const { logIn } = useContext(AuthContext)
     const handelLogin = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+
+        logIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => console.log(error));
 
 
     }
@@ -34,7 +43,9 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" />
-
+                            <label className="label">
+                                <p>Don't have an account? <Link to='/signup'>Signup now</Link></p>
+                            </label>
                         </div>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Login</button>

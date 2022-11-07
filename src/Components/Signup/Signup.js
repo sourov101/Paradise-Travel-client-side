@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import signupimg from '../assets/images/signupimg.jpg'
+import { AuthContext } from '../context/AuthProvider';
 
 const Signup = () => {
-
+    const { createUser } = useContext(AuthContext);
     const handelSignup = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -12,7 +14,13 @@ const Signup = () => {
         const photo = form.photo.value;
         console.log(email, password, name, photo)
 
-
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(err => console.error(err));
     }
 
 
@@ -49,7 +57,9 @@ const Signup = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" />
-
+                            <label className="label">
+                                <p>Already have an account? <Link to='/login'>Login now</Link></p>
+                            </label>
                         </div>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Signup</button>
