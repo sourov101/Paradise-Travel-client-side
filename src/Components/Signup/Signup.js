@@ -4,7 +4,7 @@ import signupimg from '../assets/images/signupimg.jpg'
 import { AuthContext } from '../context/AuthProvider';
 
 const Signup = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, profile } = useContext(AuthContext);
     const handelSignup = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -12,15 +12,18 @@ const Signup = () => {
         const password = form.password.value;
         const name = form.name.value;
         const photo = form.photo.value;
-        console.log(email, password, name, photo)
+        // console.log(email, password, name, photo)
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                profile(name, photo)
                 console.log(user);
                 form.reset();
             })
             .catch(err => console.error(err));
+
+
     }
 
 
