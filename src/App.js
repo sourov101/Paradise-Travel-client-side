@@ -4,11 +4,12 @@ import Blog from './Components/Blog/Blog';
 import Home from './Components/Home/Home';
 import Main from './Components/Layout/Main';
 import Login from './Components/Login/Login';
+import MyReviews from './Components/Reviews/MyReviews';
 import AddService from './Components/Services/AddService';
 import ServiceDetails from './Components/Services/ServiceDetails';
 import Services from './Components/Services/Services';
 import Signup from './Components/Signup/Signup';
-import MyReviews from './Reviews/MyReviews';
+
 
 function App() {
 

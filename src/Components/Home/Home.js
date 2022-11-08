@@ -7,7 +7,8 @@ const Home = () => {
     const { user } = useContext(AuthContext);
     const services = useLoaderData();
 
-    const [gallery, setGallery] = useState();
+    const [gallery, setGallery] = useState([]);
+    console.log(gallery)
     useEffect(() => {
         fetch('http://localhost:5000/services')
             .then(res => res.json())
@@ -73,7 +74,6 @@ const Home = () => {
 
             <div>
                 <h1 className='text-4xl font-bold my-10'>Our Investment Plans</h1>
-
                 <OurPlan></OurPlan>
             </div>
 
@@ -85,9 +85,7 @@ const Home = () => {
                     {gallery.map(service =>
                         <div key={service._id} >
                             <img src={service.img} alt="" />
-
                         </div>
-
                     )}
                 </div>
             </div>
