@@ -7,7 +7,7 @@ const AddService = () => {
     const handlesService = event => {
         event.preventDefault();
         const form = event.target;
-        const title = `${form.title.value}`;
+        const title = form.title.value;
         const name = user?.displayName || 'unregistered';
         const description = form.description.value;
         const img = form.image.value;
