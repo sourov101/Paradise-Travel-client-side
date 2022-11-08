@@ -4,6 +4,7 @@ import Blog from './Components/Blog/Blog';
 import Home from './Components/Home/Home';
 import Main from './Components/Layout/Main';
 import Login from './Components/Login/Login';
+import ServiceDetails from './Components/Services/ServiceDetails';
 import Services from './Components/Services/Services';
 import Signup from './Components/Signup/Signup';
 
@@ -34,6 +35,11 @@ function App() {
         {
           path: '/blog',
           element: <Blog></Blog>
+        },
+        {
+          path: '/serviceDetails/:id',
+          element: <ServiceDetails></ServiceDetails>,
+          loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
         },
       ]
     }
