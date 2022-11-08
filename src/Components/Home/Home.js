@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import OurPlan from './OurPlan';
 
 const Home = () => {
     const { user } = useContext(AuthContext);
@@ -30,29 +31,38 @@ const Home = () => {
 
 
                     {
-                        services.map(service => <div key={service._id} className="card card-compact w-96 bg-base-100 shadow-xl my-20 ">
-                            <figure><img src={service.img} alt="" /></figure>
-                            <div className="card-body">
-                                <h2 className="card-title">Title: {service.title}</h2>
-                                <p className='text-xl'>
+                        services.map(service =>
+                            <div key={service._id} className="card card-compact w-96 bg-base-100 shadow-xl my-20 ">
+                                <figure><img src={service.img} alt="" /></figure>
+                                <div className="card-body">
+                                    <h2 className="card-title">Title: {service.title}</h2>
+                                    <p className='text-xl'>
 
-                                    {
-                                        service.description.length > 100 ? `${service.description.substring(0, 100)}...` : service.description
+                                        {
+                                            service.description.length > 100 ? `${service.description.substring(0, 100)}...` : service.description
 
-                                    }
-                                </p>
-                                <p className='text-2xl font-semibold'>Price: ${service.price}</p>
-                                <div className="card-actions justify-end">
+                                        }
+                                    </p>
+                                    <p className='text-2xl font-semibold'>Price: ${service.price}</p>
+                                    <div className="card-actions justify-end">
 
-                                    <Link to={`/serviceDetails/${service._id}`}><button className="btn btn-primary">Details</button></Link>
+                                        <Link to={`/serviceDetails/${service._id}`}><button className="btn btn-primary">Details</button></Link>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>)
+                        )
                     }
                 </div>
 
                 <Link to={'/services'}><button className="btn btn-primary mb-10">See More</button></Link>
+            </div>
+
+
+            <div>
+                <h1 className='text-4xl font-bold my-10'>Our Investment Plans</h1>
+
+                <OurPlan></OurPlan>
             </div>
         </div>
     );
