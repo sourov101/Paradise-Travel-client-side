@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState, } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import OurPlan from './OurPlan';
@@ -6,7 +6,17 @@ import OurPlan from './OurPlan';
 const Home = () => {
     const { user } = useContext(AuthContext);
     const services = useLoaderData();
-    console.log(services)
+
+    const [gallery, setGallery] = useState();
+    useEffect(() => {
+        fetch('http://localhost:5000/services')
+            .then(res => res.json())
+            .then(data => setGallery(data))
+
+
+    }, [])
+
+
     return (
         <div>
             <div className="hero min-h-screen" style={{ backgroundImage: `url("https://img.freepik.com/free-photo/full-shot-travel-concept-with-landmarks_23-2149153258.jpg?3&w=826&t=st=1667856524~exp=1667857124~hmac=c8fa3bc199f2c32a8e1fa6bc07cfe2cdbf07db952bdf4cf63fcc1abfca383d14")` }}>
@@ -58,11 +68,28 @@ const Home = () => {
                 <Link to={'/services'}><button className="btn btn-primary mb-10">See More</button></Link>
             </div>
 
+            {/* plan area */}
+
 
             <div>
                 <h1 className='text-4xl font-bold my-10'>Our Investment Plans</h1>
 
                 <OurPlan></OurPlan>
+            </div>
+
+            {/* travel gallery */}
+
+            <div>
+                <h1 className='text-4xl font-bold my-10'>Travel Gallery</h1>
+                <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10'>
+                    {gallery.map(service =>
+                        <div key={service._id} >
+                            <img src={service.img} alt="" />
+
+                        </div>
+
+                    )}
+                </div>
             </div>
         </div>
     );
