@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
 import Review from '../Review/Review';
-
-
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
@@ -19,39 +19,41 @@ const ServiceDetails = () => {
     }, [])
 
     return (
-        <div>
-            <div className="card card-compact w-100 bg-base-100 shadow-xl m-20 ">
-                <figure><img src={service.img} alt="" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Title: {service.title}</h2>
-                    <p className='text-xl'> {service.description}</p>
-                    <p className='text-2xl font-semibold'>Price: ${service.price}</p>
-                    <div className="card-actions justify-end">
+        <PhotoProvider>
+            <div>
+                <div className="card card-compact w-100 bg-base-100 shadow-xl m-20 ">
+                    <figure><PhotoView src={service.img} ><img src={service.img} alt="" /></PhotoView></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">Title: {service.title}</h2>
+                        <p className='text-xl'> {service.description}</p>
+                        <p className='text-2xl font-semibold'>Price: ${service.price}</p>
+                        <div className="card-actions justify-end">
 
-                        {user?.uid ?
-                            <Link to={`/addReview/${service._id}`}><button className="btn btn-primary">Add Review</button></Link>
-                            :
+                            {user?.uid ?
+                                <Link to={`/addReview/${service._id}`}><button className="btn btn-primary">Add Review</button></Link>
+                                :
 
-                            <Link to={'/login'}><button className="btn btn-primary">Please login to add a review.</button></Link>
-                        }
+                                <Link to={'/login'}><button className="btn btn-primary">Please login to add a review.</button></Link>
+                            }
 
+                        </div>
                     </div>
                 </div>
+
+                <div>
+                    <h1 className='text-3xl mt-5 font-semibold mb-4'>Reviews</h1>
+
+                    {
+                        reviews.map(review => <Review
+                            key={review._id}
+                            review={review}
+                            service={service}
+                        ></Review>)
+                    }
+
+                </div>
             </div>
-
-            <div>
-                <h1 className='text-3xl mt-5 font-semibold mb-4'>Reviews</h1>
-
-                {
-                    reviews.map(review => <Review
-                        key={review._id}
-                        review={review}
-                        service={service}
-                    ></Review>)
-                }
-
-            </div>
-        </div>
+        </PhotoProvider >
     );
 };
 

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginimg from '../assets/images/loginimg.jpg'
 import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
-    const { logIn } = useContext(AuthContext)
+    const { logIn, signInWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -26,6 +26,20 @@ const Login = () => {
             .catch(error => console.log(error));
 
 
+    }
+
+
+    const handelGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(res => {
+                const user = res.user;
+                navigate(from, { replace: true })
+                console.log(user)
+
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
 
@@ -56,6 +70,9 @@ const Login = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Login</button>
+                        </div>
+                        <div className="form-control mt-6">
+                            <button onClick={handelGoogleSignIn} className="btn btn-primary">Login with Google</button>
                         </div>
                     </form>
                 </div>
