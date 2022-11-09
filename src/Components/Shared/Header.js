@@ -18,12 +18,12 @@ const Header = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/services'>Services</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
-
+        <li><Link to='/addService'>Add Service</Link></li>
         <li><Link to='/signup'>Signup</Link></li>
 
         {
             user?.uid ? <>
-                <li><Link to='/addService'>Add Service</Link></li>
+
                 <li><Link to='/myReviews'>My Reviews</Link></li>
                 <li><Link onClick={handelLogOut}> Sign out</Link></li>
 

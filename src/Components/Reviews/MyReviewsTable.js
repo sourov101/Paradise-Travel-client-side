@@ -49,7 +49,7 @@ const MyReviewsTable = ({ user, review }) => {
                         </table>
                     </div>
                     :
-                    <>No review found</>
+                    <div className='text-3xl mt-5 font-semibold mb-4 align-center'>No reviews were added</div>
             }
         </div>
     );

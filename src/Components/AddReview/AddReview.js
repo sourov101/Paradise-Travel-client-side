@@ -19,6 +19,7 @@ const AddReview = () => {
         const photo = form.photo.value;
         const review = form.review.value;
         const rating = form.rating.value;
+        const date = form.date.value;
 
 
         const reviews = {
@@ -32,7 +33,8 @@ const AddReview = () => {
             email,
 
             review,
-            rating
+            rating,
+            date
         }
         console.log(reviews);
 
@@ -73,11 +75,13 @@ const AddReview = () => {
 
                     {/* user info */}
                     <input name="name" type="text" placeholder="Your name" defaultValue={user?.displayName} className="input input-ghost w-full  input-bordered mb-4" readOnly />
-                    <input name="email" type="email" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered mb-4" readOnly />
-                    <input name="photo" type="text" placeholder="Your photo" defaultValue={user?.photoURL} className="input input-ghost w-full  input-bordered mb-4" readOnly />
-                </div>
 
+                    <input name="photo" type="text" placeholder="Your photo" defaultValue={user?.photoURL} className="input input-ghost w-full  input-bordered mb-4" readOnly />
+                    <input name="date" type="date" placeholder="" className="input input-ghost w-full  input-bordered mb-4" required />
+                </div>
+                <input name="email" type="email" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered mb-4" readOnly />
                 {/* review area */}
+
                 <input name="rating" className="textarea textarea-bordered w-full mb-4" placeholder="Your service rating " required></input>
                 <textarea name="review" className="textarea textarea-bordered h-24 w-full" placeholder="Your service review " required></textarea>
 

@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 import Review from '../Review/Review';
 
 
 
 const ServiceDetails = () => {
     const service = useLoaderData();
-    console.log(service)
-
-
+    const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
-    console.log(reviews)
+
     useEffect(() => {
         fetch('http://localhost:5000/reviews')
             .then(res => res.json())
@@ -29,7 +28,12 @@ const ServiceDetails = () => {
                     <p className='text-2xl font-semibold'>Price: ${service.price}</p>
                     <div className="card-actions justify-end">
 
-                        <Link to={`/addReview/${service._id}`}><button className="btn btn-primary">Add Review</button></Link>
+                        {user?.uid ?
+                            <Link to={`/addReview/${service._id}`}><button className="btn btn-primary">Add Review</button></Link>
+                            :
+
+                            <Link to={'/login'}><button className="btn btn-primary">Please login to add a review.</button></Link>
+                        }
 
                     </div>
                 </div>
