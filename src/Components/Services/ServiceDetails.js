@@ -36,7 +36,7 @@ const ServiceDetails = () => {
             </div>
 
             <div>
-                <h1 className='text-3xl mt-5 font-semibold'>Reviews</h1>
+                <h1 className='text-3xl mt-5 font-semibold mb-4'>Reviews</h1>
 
                 {
                     reviews.map(review => <Review

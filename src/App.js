@@ -48,7 +48,8 @@ function App() {
         },
         {
           path: '/myReviews',
-          element: <MyReviews></MyReviews>
+          element: <MyReviews></MyReviews>,
+          loader: () => fetch('http://localhost:5000/reviews')
         },
         {
           path: '/addReview/:id',

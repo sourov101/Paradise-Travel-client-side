@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Review = ({ review, service }) => {
+const MyReviewsTable = ({ user, review }) => {
     return (
         <div>
             {
-                review.id === service._id ?
+                user?.email === review?.email ?
                     <div className="overflow-x-auto w-full my-10">
                         <table className="table table-zebra w-full">
 
@@ -48,14 +48,11 @@ const Review = ({ review, service }) => {
                             </tfoot>
                         </table>
                     </div>
-
                     :
-
-                    <> </>
-
+                    <>No review found</>
             }
         </div>
     );
 };
 
-export default Review;
+export default MyReviewsTable;
