@@ -6,6 +6,7 @@ import Home from './Components/Home/Home';
 import Main from './Components/Layout/Main';
 import Login from './Components/Login/Login';
 import MyReviews from './Components/Reviews/MyReviews';
+import UpdateReview from './Components/Reviews/UpdateReview';
 import PrivateRoute from './Components/Routes/PrivateRoute';
 import AddService from './Components/Services/AddService';
 import ServiceDetails from './Components/Services/ServiceDetails';
@@ -42,6 +43,7 @@ function App() {
           path: '/blog',
           element: <Blog></Blog>
         },
+
         {
           path: '/addService',
           element: <PrivateRoute><AddService></AddService></PrivateRoute>
@@ -51,6 +53,7 @@ function App() {
           element: <MyReviews></MyReviews>,
           loader: () => fetch('http://localhost:5000/reviews')
         },
+
         {
           path: '/addReview/:id',
           element: <PrivateRoute><AddReview></AddReview></PrivateRoute>,
@@ -60,6 +63,11 @@ function App() {
           path: '/serviceDetails/:id',
           element: <ServiceDetails></ServiceDetails>,
           loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+        },
+        {
+          path: '/updateReview/:id',
+          element: <UpdateReview></UpdateReview>,
+          loader: ({ params }) => fetch(`http://localhost:5000/reviews/${params.id}`)
         },
       ]
     }
