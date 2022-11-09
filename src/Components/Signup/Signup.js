@@ -20,6 +20,8 @@ const Signup = () => {
                 profile(name, photo)
                 console.log(user);
                 form.reset();
+
+
             })
             .catch(err => console.error(err));
 

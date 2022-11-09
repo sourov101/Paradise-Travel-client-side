@@ -36,10 +36,10 @@ const AddService = () => {
         })
             .then(res => res.json())
             .then(data => {
-                notify();
+
                 console.log(data)
                 if (data.acknowledged) {
-
+                    notify();
                     form.reset();
                 }
             })
@@ -48,11 +48,11 @@ const AddService = () => {
 
     }
     function notify() {
-        toast.success('Here is your toast.');
+        toast.success('Service added successfully!!!');
     };
     return (
         <div>
-            <h1 className='text-3xl mt-5'>Service added successfully !!!</h1>
+            <h1 className='text-3xl mt-5 font-semibold'>Add your service here:</h1>
 
             <form className='my-20' onSubmit={handlesService}>
 

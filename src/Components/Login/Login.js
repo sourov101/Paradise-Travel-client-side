@@ -6,7 +6,7 @@ const Login = () => {
     const { logIn } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/'
+    const from = location.state?.from?.pathname || '/';
 
 
     const handelLogin = (event) => {
@@ -14,7 +14,7 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        // console.log(email, password)
 
         logIn(email, password)
             .then(result => {

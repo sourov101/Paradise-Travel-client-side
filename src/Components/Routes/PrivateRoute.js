@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthProvider';
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const { location } = useLocation();
-
+    console.log(user)
     if (loading) {
         return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>;
     }

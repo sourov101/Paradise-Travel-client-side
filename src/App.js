@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import AddReview from './Components/AddReview/AddReview';
 import Blog from './Components/Blog/Blog';
 import Home from './Components/Home/Home';
 import Main from './Components/Layout/Main';
 import Login from './Components/Login/Login';
 import MyReviews from './Components/Reviews/MyReviews';
+import PrivateRoute from './Components/Routes/PrivateRoute';
 import AddService from './Components/Services/AddService';
 import ServiceDetails from './Components/Services/ServiceDetails';
 import Services from './Components/Services/Services';
@@ -42,11 +44,16 @@ function App() {
         },
         {
           path: '/addService',
-          element: <AddService></AddService>
+          element: <PrivateRoute><AddService></AddService></PrivateRoute>
         },
         {
           path: '/myReviews',
           element: <MyReviews></MyReviews>
+        },
+        {
+          path: '/addReview/:id',
+          element: <PrivateRoute><AddReview></AddReview></PrivateRoute>,
+          loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
         },
         {
           path: '/serviceDetails/:id',
