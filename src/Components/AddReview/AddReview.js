@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddReview = () => {
     const { user } = useContext(AuthContext);
@@ -34,11 +36,30 @@ const AddReview = () => {
         }
         console.log(reviews);
 
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(reviews)
+        })
+            .then(res => res.json())
+            .then(data => {
 
+                console.log(data)
+                if (data.acknowledged) {
+                    notify();
+                    form.reset();
+                }
+            })
+            .catch(err => console.log(err))
 
 
     }
 
+    function notify() {
+        toast.success('Review added successfully!!!');
+    };
 
     return (
         <div>
@@ -62,7 +83,7 @@ const AddReview = () => {
 
 
                 <input className='btn my-10' type="submit" value="Add Review" />
-
+                <Toaster />
 
             </form>
         </div>

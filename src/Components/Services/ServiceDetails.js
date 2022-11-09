@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import Review from '../Review/Review';
 
 
 
 const ServiceDetails = () => {
     const service = useLoaderData();
+    console.log(service)
+
+
+    const [reviews, setReviews] = useState([]);
+    console.log(reviews)
+    useEffect(() => {
+        fetch('http://localhost:5000/reviews')
+            .then(res => res.json())
+            .then(data => setReviews(data))
+
+
+    }, [])
 
     return (
         <div>
@@ -23,7 +36,15 @@ const ServiceDetails = () => {
             </div>
 
             <div>
-                <h1>review section</h1>
+                <h1 className='text-3xl mt-5 font-semibold'>Reviews</h1>
+
+                {
+                    reviews.map(review => <Review
+                        key={review._id}
+                        review={review}
+                        service={service}
+                    ></Review>)
+                }
 
             </div>
         </div>
