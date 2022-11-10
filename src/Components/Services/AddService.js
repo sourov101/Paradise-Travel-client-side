@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet';
 
 const AddService = () => {
     const { user } = useContext(AuthContext);
@@ -52,6 +53,9 @@ const AddService = () => {
     };
     return (
         <div>
+            <Helmet>
+                <title>Paradise Travel: Add services</title>
+            </Helmet>
             <h1 className='text-3xl mt-5 font-semibold'>Add your service here:</h1>
 
             <form className='my-20' onSubmit={handlesService}>

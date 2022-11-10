@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import { Link, useLocation, useNavigate, } from 'react-router-dom';
 import loginimg from '../assets/images/loginimg.jpg'
 import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
     const { logIn, signInWithGoogle } = useContext(AuthContext)
-    const navigate = useNavigate();
+
     const location = useLocation();
+    const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
 
 
@@ -20,8 +22,29 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                form.reset();
+
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+
+                        localStorage.setItem('token', data.token);
+
+                    })
+
                 navigate(from, { replace: true })
+                form.reset();
+
             })
             .catch(error => console.log(error));
 
@@ -46,6 +69,9 @@ const Login = () => {
 
     return (
         <div className="hero min-h-screen bg-base-200">
+            <Helmet>
+                <title>Paradise Travel: Login</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row">
                 <div className="text-center lg:text-left">
                     <img src={loginimg} alt="" />

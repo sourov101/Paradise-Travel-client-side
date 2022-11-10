@@ -5,11 +5,13 @@ import Review from '../Review/Review';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
 
+
+
 const ServiceDetails = () => {
     const service = useLoaderData();
     const { user } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
-
+    console.log(reviews)
     useEffect(() => {
         fetch('http://localhost:5000/reviews')
             .then(res => res.json())
@@ -18,9 +20,15 @@ const ServiceDetails = () => {
 
     }, [])
 
+    if (!user) {
+
+    }
+
+
     return (
         <PhotoProvider>
             <div>
+
                 <div className="card card-compact w-100 bg-base-100 shadow-xl m-20 ">
                     <figure><PhotoView src={service.img} ><img src={service.img} alt="" /></PhotoView></figure>
                     <div className="card-body">
@@ -29,11 +37,16 @@ const ServiceDetails = () => {
                         <p className='text-2xl font-semibold'>Price: ${service.price}</p>
                         <div className="card-actions justify-end">
 
-                            {user?.uid ?
-                                <Link to={`/addReview/${service._id}`}><button className="btn btn-primary">Add Review</button></Link>
-                                :
 
-                                <Link to={'/login'}><button className="btn btn-primary">Please login to add a review.</button></Link>
+                            <Link to={`/addReview/${service._id}`}><button className="btn btn-primary">Add Review</button></Link>
+
+
+
+
+                        </div>
+                        <div>
+                            {
+                                !user && !user?.uid ? <h1 className='text-3xl mt-5 font-semibold'>Please Login to Add Review</h1> : <></>
                             }
 
                         </div>
@@ -43,12 +56,13 @@ const ServiceDetails = () => {
                 <div>
                     <h1 className='text-3xl mt-5 font-semibold mb-4'>Reviews</h1>
 
-                    {
+                    {Array.isArray(reviews)
+                        ?
                         reviews.map(review => <Review
                             key={review._id}
                             review={review}
                             service={service}
-                        ></Review>)
+                        ></Review>) : null
                     }
 
                 </div>

@@ -1,14 +1,31 @@
-import React, { useContext, useState, } from 'react';
+import React, { useContext, useEffect, useState, } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const reviews = useLoaderData();
+    console.log(user?.email);
     const [displayReview, setDisplayReview] = useState(reviews);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews?=${user?.email}`, {
+            headers: {
+                authorization: `${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data =>
+                console.log(data)
+            )
+    }, [user?.email])
+
+
+
     const handelDelete = (review) => {
         const agree = window.confirm(`Are you sure you want to delete ${review?._id}`);
         if (agree) {
@@ -23,7 +40,7 @@ const MyReviews = () => {
                         const remaining = displayReview.filter(rev => rev._id !== review._id);
                         setDisplayReview(remaining)
                     }
-                    console.log(data);
+                    // console.log(data);
                 });
         }
     }
@@ -35,16 +52,21 @@ const MyReviews = () => {
 
     return (
         <div>
-            {
-                reviews.length === 0 ?
+            <Helmet>
+                <title>Paradise Travel: My Reviews</title>
+            </Helmet>
+            {Array.isArray(reviews)
+                ?
+                reviews?.length === 0 ?
                     <div className='text-3xl mt-5 font-semibold mb-4 align-center'>No reviews were added</div>
                     :
-                    <></>
+                    <></> : null
             }
 
 
-            {
-                reviews.map(review => <div key={review._id}>
+            {Array.isArray(reviews)
+                ?
+                reviews?.map(review => <div key={review._id}>
 
                     {
                         user?.email === review?.email
@@ -104,7 +126,9 @@ const MyReviews = () => {
                             <></>
                     }
 
-                </div>)
+                </div>
+
+                ) : null
             }
         </div>
     );

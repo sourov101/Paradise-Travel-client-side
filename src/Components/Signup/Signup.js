@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import signupimg from '../assets/images/signupimg.jpg'
 import { AuthContext } from '../context/AuthProvider';
@@ -32,6 +33,9 @@ const Signup = () => {
 
     return (
         <div className="hero min-h-screen bg-base-200">
+            <Helmet>
+                <title>Paradise Travel: Signup</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
                     <img src={signupimg} alt="" />
