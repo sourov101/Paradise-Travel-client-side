@@ -6,12 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateReview = () => {
     const reviews = useLoaderData();
+    console.log(reviews)
     const { user } = useContext(AuthContext);
+    console.log(user);
     const [review, setReview] = useState(reviews)
     const handelUpdate = event => {
         event.preventDefault();
-        console.log(review)
-        fetch(`http://localhost:5000/reviews/${reviews._id}`, {
+        console.log(event)
+        fetch(`http://localhost:5000/updateReview/${reviews._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -29,6 +31,7 @@ const UpdateReview = () => {
 
 
     }
+
 
     const handleInputChange = event => {
         const field = event.target.name;
@@ -54,8 +57,8 @@ const UpdateReview = () => {
                 <input name="email" type="email" placeholder="Your email" defaultValue={user?.email} className="input input-ghost w-full  input-bordered mb-4" readOnly />
                 {/* review area */}
 
-                <input onChange={handleInputChange} name="rating" defaultValue={reviews.rating} className="textarea textarea-bordered w-full mb-4" placeholder="Your service rating " required></input>
-                <textarea onChange={handleInputChange} name="review" defaultValue={reviews.review} className="textarea textarea-bordered h-24 w-full" placeholder="Your service review " required></textarea>
+                <input onChange={handleInputChange} name="rating" defaultValue={reviews?.rating} className="textarea textarea-bordered w-full mb-4" placeholder="Your service rating " required></input>
+                <textarea onChange={handleInputChange} name="review" defaultValue={reviews?.review} className="textarea textarea-bordered h-24 w-full" placeholder="Your service review " required></textarea>
 
 
                 <input className='btn my-10' type="submit" value="Update Review" />
