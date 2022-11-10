@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../context/AuthProvider';
 import ServiceCard from './ServiceCard';
 
 const Services = () => {
+    const { loading } = useContext(AuthContext);
     const services = useLoaderData();
+
+    if (loading) {
+        return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>
+    }
+
     return (
         <div>
             <Helmet>

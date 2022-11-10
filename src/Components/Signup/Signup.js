@@ -5,7 +5,7 @@ import signupimg from '../assets/images/signupimg.jpg'
 import { AuthContext } from '../context/AuthProvider';
 
 const Signup = () => {
-    const { createUser, profile } = useContext(AuthContext);
+    const { createUser, profile, loading } = useContext(AuthContext);
     const handelSignup = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -29,7 +29,9 @@ const Signup = () => {
 
     }
 
-
+    if (loading) {
+        return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200">

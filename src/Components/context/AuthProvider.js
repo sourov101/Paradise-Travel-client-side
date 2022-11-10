@@ -17,9 +17,6 @@ const AuthProvider = ({ children }) => {
 
     const createUser = (email, password) => {
         setLoading(true);
-        if (loading) {
-            return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>;
-        }
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
@@ -31,9 +28,6 @@ const AuthProvider = ({ children }) => {
 
     const logIn = (email, password) => {
         setLoading(true);
-        if (loading) {
-            return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>;
-        }
         return signInWithEmailAndPassword(auth, email, password);
     }
     const profile = (name, photo) => {
@@ -44,7 +38,7 @@ const AuthProvider = ({ children }) => {
         })
     }
     const logOut = () => {
-
+        setLoading(true);
         localStorage.removeItem('token');
         return signOut(auth);
 

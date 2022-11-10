@@ -36,7 +36,7 @@ const AddReview = () => {
             rating,
             date
         }
-        console.log(reviews);
+
 
         fetch('http://localhost:5000/reviews', {
             method: 'POST',

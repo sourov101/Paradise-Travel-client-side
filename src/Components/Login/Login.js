@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate, } from 'react-router-dom';
 import loginimg from '../assets/images/loginimg.jpg'
 import { AuthContext } from '../context/AuthProvider';
 const Login = () => {
-    const { logIn, signInWithGoogle } = useContext(AuthContext)
+    const { logIn, signInWithGoogle, loading } = useContext(AuthContext)
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -65,7 +65,9 @@ const Login = () => {
             })
     }
 
-
+    if (loading) {
+        return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200">

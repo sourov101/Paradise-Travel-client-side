@@ -9,7 +9,7 @@ import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     console.log(reviews)
     useEffect(() => {
@@ -24,7 +24,9 @@ const ServiceDetails = () => {
 
     }
 
-
+    if (loading) {
+        return <div className="radial-progress" style={{ "--value": 100 }}>100%</div>
+    }
     return (
         <PhotoProvider>
             <div>

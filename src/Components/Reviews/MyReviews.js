@@ -9,8 +9,12 @@ import { Helmet } from 'react-helmet';
 const MyReviews = () => {
     const { user, logOut } = useContext(AuthContext);
     const reviews = useLoaderData();
-    console.log(user);
+
     const [displayReview, setDisplayReview] = useState(reviews);
+
+
+
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/reviews?=${user?.email}`, {
@@ -19,21 +23,19 @@ const MyReviews = () => {
             }
         })
             .then(res => {
-                console.log(res)
                 if (res.status === 401) {
                     return logOut();
                 }
                 return res.json()
             })
-            .then(data =>
-                console.log(data)
+            .then(data => { setDisplayReview(data); }
             )
     }, [user?.email, logOut])
 
 
 
     const handelDelete = (review) => {
-        console.log(review.email);
+
         const agree = window.confirm(`Are you sure you want to delete ${review?._id}`);
         if (agree) {
 
@@ -42,15 +44,19 @@ const MyReviews = () => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     if (data.deletedCount > 0) {
                         notify();
-                        const remaining = displayReview.filter(rev => rev._id !== review._id);
+                        const remaining = reviews.filter(r => r._id !== review._id)
                         setDisplayReview(remaining)
                     }
-                    console.log(data);
-                });
+
+                })
+                .catch(err => console.log(err))
         }
     }
+
+
 
 
     function notify() {
@@ -62,6 +68,7 @@ const MyReviews = () => {
             <Helmet>
                 <title>Paradise Travel: My Reviews</title>
             </Helmet>
+
 
 
 
@@ -125,7 +132,7 @@ const MyReviews = () => {
                                     </table>
                                 </div>
                                 :
-                                <><div className='text-3xl mt-5 font-semibold mb-4 align-center'>No reviews were added</div></>
+                                <>No reviews were added</>
                         }
 
                     </div>
