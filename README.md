@@ -1,4 +1,4 @@
-<h1>Welcome to Paradice Travel</h1>
+<h1>Welcome to Paradise Travel</h1>
 
 1.Paradise travel is a travel review site where users can review the services the have chosen to travel </br>
 2.React, firebase, react router, node, express, mongodb are used to create this site.</br>
