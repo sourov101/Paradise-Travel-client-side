@@ -24,7 +24,7 @@ function App() {
         {
           path: '/',
           element: <Home></Home>,
-          loader: () => fetch('http://localhost:5000/homeServices')
+          loader: () => fetch('https://paradice-travel-server-sourov101.vercel.app/homeServices')
         },
         {
           path: '/login',
@@ -37,7 +37,7 @@ function App() {
         {
           path: '/services',
           element: <Services></Services>,
-          loader: () => fetch('http://localhost:5000/services')
+          loader: () => fetch('https://paradice-travel-server-sourov101.vercel.app/services')
         },
         {
           path: '/blog',
@@ -51,23 +51,23 @@ function App() {
         {
           path: '/myReviews',
           element: <MyReviews></MyReviews>,
-          loader: () => fetch('http://localhost:5000/reviews')
+          loader: () => fetch('https://paradice-travel-server-sourov101.vercel.app/reviews')
         },
 
         {
           path: '/addReview/:id',
           element: <PrivateRoute><AddReview></AddReview></PrivateRoute>,
-          loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+          loader: ({ params }) => fetch(`https://paradice-travel-server-sourov101.vercel.app/services/${params.id}`)
         },
         {
           path: '/serviceDetails/:id',
           element: <ServiceDetails></ServiceDetails>,
-          loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+          loader: ({ params }) => fetch(`https://paradice-travel-server-sourov101.vercel.app/services/${params.id}`)
         },
         {
           path: '/updateReview/:id',
           element: <UpdateReview></UpdateReview>,
-          loader: ({ params }) => fetch(`http://localhost:5000/reviews/${params.id}`)
+          loader: ({ params }) => fetch(`https://paradice-travel-server-sourov101.vercel.app/reviews/${params.id}`)
         },
       ]
     }

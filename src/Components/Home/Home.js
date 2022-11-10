@@ -11,7 +11,7 @@ const Home = () => {
     const [gallery, setGallery] = useState([]);
     console.log(gallery)
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://paradice-travel-server-sourov101.vercel.app/services')
             .then(res => res.json())
             .then(data => setGallery(data))
 

@@ -17,7 +17,7 @@ const MyReviews = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?=${user?.email}`, {
+        fetch(`https://paradice-travel-server-sourov101.vercel.app/reviews?=${user?.email}`, {
             headers: {
                 authorization: `${localStorage.getItem('token')}`
             }
@@ -39,7 +39,7 @@ const MyReviews = () => {
         const agree = window.confirm(`Are you sure you want to delete ${review?._id}`);
         if (agree) {
 
-            fetch(`http://localhost:5000/reviews/${review._id}`, {
+            fetch(`https://paradice-travel-server-sourov101.vercel.app/reviews/${review._id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())

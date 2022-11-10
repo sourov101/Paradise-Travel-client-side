@@ -13,7 +13,7 @@ const UpdateReview = () => {
     const handelUpdate = event => {
         event.preventDefault();
         console.log(event)
-        fetch(`http://localhost:5000/updateReview/${reviews._id}`, {
+        fetch(`https://paradice-travel-server-sourov101.vercel.app/updateReview/${reviews._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

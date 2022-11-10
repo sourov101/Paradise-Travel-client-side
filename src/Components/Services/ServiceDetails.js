@@ -13,7 +13,7 @@ const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
     console.log(reviews)
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://paradice-travel-server-sourov101.vercel.app/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
 

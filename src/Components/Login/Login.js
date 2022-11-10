@@ -27,7 +27,7 @@ const Login = () => {
                     email: user.email
                 }
                 console.log(currentUser)
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://paradice-travel-server-sourov101.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

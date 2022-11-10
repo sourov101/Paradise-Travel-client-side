@@ -28,7 +28,7 @@ const AddService = () => {
                 name
         }
         console.log(services)
-        fetch('http://localhost:5000/services', {
+        fetch('https://paradice-travel-server-sourov101.vercel.app/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
